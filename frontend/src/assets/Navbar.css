@@ -1,0 +1,24 @@
+ul {
+    display: flex;
+    margin: 0;
+    justify-content: space-evenly;
+    list-style-type: none;
+    background-color: rgb(32, 30, 28);
+    color:azure;
+    padding: 30px;
+    position:sticky;
+    top: 0;
+  }
+  
+  .link {
+    cursor: pointer;
+    border-radius: 10px;
+    text-decoration: none;
+    color:azure;
+  }
+  
+  .link:hover {
+    padding: 5px;
+      background-color: white;
+      color: rgb(32, 30, 28);
+    }
