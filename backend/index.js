@@ -32,30 +32,33 @@ app.get('/static',(req,res)=>{
 })
 
 app.post('/signup',(req,res)=>{
-    var {firstName,lastName,email}=req.body;
-    console.log(firstName,lastName,email)
+    // var newUser=new User(req.body).save()
+    //var {firstName,lastName,email}=req.body;
+   // console.log(firstName,lastName,email)
     try{
-        var newUser=new User({
-            firstName:firstName,
-            lastName:lastName,
-            email:email
-        }).save();
-        console.log("user added")
+        // var newUser=new User({
+        //     firstName:firstName,
+        //     lastName:lastName,
+        //     email:email
+        // }).save();
+        var newUser=new User(req.body).save();
+        console.log(req.body.password)
         res.status(200).send("user added succesfully")
 
     }catch(error){
         console.log(error)
     }
     //res.send("hello")
+
 })
 app.post('/form',(req,res)=>{
-    var {firstName, lastName,
-        dob,
-        phone,
-        college,
-        department,
-        bloodGroup,
-        address}=req.body
+    // var {firstName, lastName,
+    //     dob,
+    //     phone,
+    //     college,
+    //     department,
+    //     bloodGroup,
+    //     address}=req.body
 console.log(firstName,
             lastName,
             dob,
@@ -66,13 +69,7 @@ console.log(firstName,
             address)
 
 try{
-     var newFormUser=new Form({
-        firstName:firstName,lastName:lastName, dob:dob,
-        phone:phone, college:college,
-        department:department,
-        bloodGroup:bloodGroup,
-        address:address
-     }).save()
+     var newFormUser=new Form(req.body).save()
      console.log("Form user added successfully");
      res.status(200).send("form User added");
 
@@ -90,6 +87,29 @@ app.get('/getsignup',async(req,res)=>{
         console.log(error)
     }
 })
+
+app.post('/login',async(req,res)=>{
+    var {email,password}=req.body
+
+    try{
+          var  existingUser= await User.findOne({email:email})
+          console.log(existingUser)
+          if(existingUser){
+            if(existingUser.password!=password)
+            res.json({message:"Invalid Credentials",isLoggedIn:false})
+            else
+            res.json({message:"Login Successfull",isLoggedIn:true})
+          }
+          else
+          {
+            res.json({message:"Login not successfull",isLoggedIn:false})
+          }
+         
+    }catch(error){
+          console.log(error)
+    }
+})
+
 
 app.listen(port,()=>{
    // console.log(`Backend Server started\nUrl: http://localhost:${port}`)
