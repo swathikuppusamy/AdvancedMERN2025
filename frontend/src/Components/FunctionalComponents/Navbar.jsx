@@ -14,6 +14,10 @@ var Navbar=()=>{
     <li><Link to='/about' className="link">About </Link></li>
     <li><Link to='/gallery' className="link">Gallery</Link> </li>
     <li><Link to='/contact' className="link">Contact</Link> </li>
+    <li><Link to='/login' className="link">Login</Link> </li>
+    <li><Link to='/signin' className="link">SignIn</Link> </li>
+
+
     </ul>
     </nav>
     </header>
