@@ -1,36 +1,39 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-
+import{useNavigate} from 'react-router-dom'
 const SignUp = () => {
     const [firstName,setfname]=useState("");
     const [lastName,setlname]=useState("");
     const [email,setemail]=useState("");
     const [password,setpassword]=useState("");
-
-    var signin =()=>{
-        var req=axios.post("https://localhost:3001/signup",{
+    var navigate = useNavigate();
+    var signin =async(event)=>{
+      event.preventDefault();
+        var req=axios.post("http://localhost:3001/signup",{
             firstName:firstName,
             lastName:lastName,
             email:email,
             password:password
         })
-        console.log(req)
+        console.log(req);
+        navigate('/login');
+
     }
 
 
   return (
     <div>
         <h2>SignIn</h2>
-        <form action="">
+        <form onSubmit={signin}>
         <label htmlFor="firstname">First Name  </label>
-        <input type="text"/><br />
+        <input type="text" value={firstName} onChange={(e)=>setfname(e.target.value)}/><br />
         <label htmlFor="lastname">Last Name</label>
-        <input type="text"/><br />
+        <input type="text" value={lastName} onChange={(e)=>setlname(e.target.value)}/><br />
         <label htmlFor="email">Email</label>
-        <input type="text"/><br />
+        <input type="email" value={email} onChange={(e)=>setemail(e.target.value)}/><br />
         <label htmlFor="password">Password</label>
-        <input type="text"/><br />
-        <button  type='submit'>SignIn</button>
+        <input type="password" value={password} onChange={(e)=>setpassword(e.target.value)}/><br />
+        <button  type='submit'>SignUp</button>
         </form>
       
     </div>

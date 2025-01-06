@@ -4,18 +4,30 @@ import {fileURLToPath} from 'url';
 import mdb from 'mongoose';
 import User from '../backend/models/users.js'
 import Form from '../backend/models/practicemodel.js'
+import env from 'dotenv'
+import cors from 'cors'
+
+env.config()
+
 
 const file=fileURLToPath(import.meta.url)
 const __dirname=path.dirname(file)
 const port=3001;
 var app=express();
 
+app.use(cors())
 app.use(express.json())
 
-mdb.connect('mongodb://localhost:27017/KEC').then(()=>{
-    console.log("mongodb connection established");
-}).catch(()=>{
-    console.log("Check your connection string");
+// mdb.connect('mongodb://localhost:27017/KEC').then(()=>{
+//     console.log("mongodb connection established");
+// }).catch(()=>{
+//     console.log("Check your connection string");
+// })
+mdb.connect(process.env.MONGO_URL).then(() => {//mongodb://localhost:27017
+    console.log(process.env.MONGO_URL)
+    console.log("MonoDB connection Successful");
+}).catch(() => {
+    console.log("check your connection string");
 })
 
 
@@ -31,24 +43,46 @@ app.get('/static',(req,res)=>{
     res.sendFile(path.join(__dirname,'index.html'))
 })
 
-app.post('/signup',(req,res)=>{
-    // var newUser=new User(req.body).save()
-    //var {firstName,lastName,email}=req.body;
-   // console.log(firstName,lastName,email)
-    try{
-        // var newUser=new User({
-        //     firstName:firstName,
-        //     lastName:lastName,
-        //     email:email
-        // }).save();
-        var newUser=new User(req.body).save();
-        console.log(req.body.password)
-        res.status(200).send("user added succesfully")
+// app.post('/signup',(req,res)=>{
+//     // var newUser=new User(req.body).save()
+//     //var {firstName,lastName,email}=req.body;
+//    // console.log(firstName,lastName,email)
+//     try{
+//         // var newUser=new User({
+//         //     firstName:firstName,
+//         //     lastName:lastName,
+//         //     email:email
+//         // }).save();
+//         var newUser=new User(req.body).save();
+//         console.log(req.body.password)
+//         res.status(200).send("user added succesfully")
 
-    }catch(error){
-        console.log(error)
+//     }catch(error){
+//         console.log(error)
+//     }
+//     //res.send("hello")
+
+// })
+app.post('/signup', (req, res) => {
+    console.log(req.body);
+    var { firstName, lastName, email, password } = req.body
+    console.log(firstName, lastName, email, password);
+    try {
+        // var newUser = new User({
+        //     firstName: firstName,
+        //     lastName: lastName,
+        //     email: email,
+        //     password:password
+        //})
+        var newUser = new User(req.body)
+        console.log(req.body.password);
+        newUser.save()
+        console.log("User Added Successfully");
+        res.status(200).send("User  Added successfully")
     }
-    //res.send("hello")
+    catch (err) {
+        console.log(err);
+    }
 
 })
 app.post('/form',(req,res)=>{
