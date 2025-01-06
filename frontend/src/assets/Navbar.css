@@ -1,14 +1,17 @@
-ul {
+ul{
     display: flex;
     margin: 0;
-    justify-content: space-evenly;
+    justify-content: space-around;
     list-style-type: none;
     background-color: rgb(32, 30, 28);
     color:azure;
-    padding: 30px;
+    margin:0px;
+    padding: 25px;
+    top:0px;
     position:sticky;
-    top: 0;
+
   }
+  
   
   .link {
     cursor: pointer;
@@ -18,7 +21,6 @@ ul {
   }
   
   .link:hover {
-    padding: 5px;
-      background-color: white;
-      color: rgb(32, 30, 28);
+      /* background-color: white; */
+      color: rgb(42, 184, 75);
     }

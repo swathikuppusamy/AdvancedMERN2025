@@ -1,25 +1,17 @@
-footer{
-    display:flex;
-    justify-content:space-around;
-    list-style-type: none;
-    background-color: rgb(32, 30, 28);
-    color:azure;
-    padding: 20px;
-    width: 100%;
-    text-align: center;
-    bottom: 0;
-  }
-  ul{
+
+  footer{
     display: flex;
     justify-content: space-around;
     list-style-type: none;
     background-color: rgb(32, 30, 28);
     color:azure;
+    padding: 20px;
+    text-align: center;
+    flex-direction: column;
+    max-width: 100%;
+    position:sticky;
   }
   li{
     justify-content: space-evenly;
-    display: flex;
-  }
-  .col{
-    display:table-cell;
+    display: table-column;
   }
