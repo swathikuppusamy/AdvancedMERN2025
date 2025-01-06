@@ -9,7 +9,7 @@ const SignUp = () => {
     var navigate = useNavigate();
     var signin =async(event)=>{
       event.preventDefault();
-        var req=axios.post("http://localhost:3001/signup",{
+        var req= await axios.post("http://localhost:3001/signup",{
             firstName:firstName,
             lastName:lastName,
             email:email,

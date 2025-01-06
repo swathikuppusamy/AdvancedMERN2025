@@ -16,7 +16,7 @@ const port=3001;
 var app=express();
 
 app.use(cors({
-  origin: "https://your-frontend-url.com",
+  origin: "https://advanced-mern-2025.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 
