@@ -15,7 +15,11 @@ const __dirname=path.dirname(file)
 const port=3001;
 var app=express();
 
-app.use(cors())
+app.use(cors({
+  origin: "https://your-frontend-url.com",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}));
+
 app.use(express.json())
 
 // mdb.connect('mongodb://localhost:27017/KEC').then(()=>{
